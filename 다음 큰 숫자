@@ -1,0 +1,28 @@
+class Solution {
+    public int solution(int n) {
+        int answer = n;
+        while(true){
+            //초기 조건 설정(n부터 1씩 늘림)
+            answer++;
+            //이진수 1 갯수 셈
+            String a = Integer.toBinaryString(n);
+            String b = Integer.toBinaryString(answer);
+            int count_a=0;
+            int count_b=0;
+            for(int i=0;i<a.length();i++){
+                if(a.charAt(i)==49) {
+                    count_a++;
+                }
+            }
+            for(int i=0;i<b.length();i++){
+                if(b.charAt(i)==49) {
+                    count_b++;
+                }
+            }
+            if(count_a==count_b){
+                break;
+            }
+        }
+        return answer;
+    }
+}
