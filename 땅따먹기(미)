@@ -32,3 +32,5 @@ class Solution {
         return answer;
     }
 }
+
+//이거는 이제 최적의 경우고 다른 경우를 생각해야함
