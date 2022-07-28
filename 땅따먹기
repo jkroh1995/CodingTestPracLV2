@@ -1,0 +1,34 @@
+import java.util.*;
+class Solution {
+    int solution(int[][] land) {
+        int answer = 0;
+        int y=0;
+        int temp_y=0;
+        int max=0;
+        for(int i=0;i<land.length;i++){
+            max=land[i][0];
+            for(int j=0;j<4;j++){
+                if(i==0){
+                    if(land[i][j]>max) {
+                        max = land[i][j];
+                        temp_y=j;
+                    }
+                }
+                else{
+                    if(j==y){
+                        continue;
+                    }
+                    else{
+                        if(land[i][j]>max){
+                            max=land[i][j];
+                            temp_y=j;
+                        }
+                    }
+                }
+            }
+            y=temp_y;
+            answer+=max;
+        }
+        return answer;
+    }
+}
