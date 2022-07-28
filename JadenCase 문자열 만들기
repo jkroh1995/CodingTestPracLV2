@@ -1,0 +1,20 @@
+import java.util.*;
+class Solution {
+    public String solution(String s) {
+        String answer = "";
+        String [] line = s.split("");
+
+        for(int i=0;i<line.length;i++){
+            if(i==0||line[i-1].equals(" ")){
+                line[i]=line[i].toUpperCase();
+                answer+=line[i];
+            }
+            else{
+                line[i]=line[i].toLowerCase();
+                answer+=line[i];
+            }
+        }
+
+        return answer;
+    }
+}
