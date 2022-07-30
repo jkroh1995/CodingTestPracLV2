@@ -1,0 +1,21 @@
+import java.util.*;
+
+class Solution {
+    public int[] solution(int brown, int yellow) {
+        
+        int x=3;
+        int y=3;
+        while(true){
+            if(x*y-yellow==brown&&(x-2)*(y-2)==yellow) break;
+            else if(x>y){
+                y++;
+            }
+            else{
+                x++;
+                y=3;
+            }
+        }
+        int[] answer = {x,y};
+        return answer;
+    }
+}
