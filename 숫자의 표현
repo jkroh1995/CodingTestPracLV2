@@ -1,0 +1,22 @@
+import java.util.*;
+class Solution {
+    public int solution(int n) {
+        int answer = 0;
+        for(int i=1;i<n;i++) {
+            int sum=0;
+            for (int j = i; j < n; j++) {
+                sum += j;
+                if (sum == n) {
+                    answer++;
+                    break;
+                }
+                else if(sum>n){
+                    break;
+                }
+            }
+        }
+        //n을 제외하니까 마지막에 +1 해줘야함
+        answer++;
+        return answer;
+    }
+}
