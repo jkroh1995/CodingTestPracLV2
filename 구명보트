@@ -2,36 +2,32 @@ import java.util.*;
 class Solution {
     public int solution(int[] people, int limit) {
         int answer = 0;
-        int [] aa = new int[people.length];
+
+        //일단 정렬해
         Arrays.sort(people);
-
-
+        //리스트 만들고
+        ArrayList<Integer>list = new ArrayList<>();
+        //하나씩 넣고
         for(int i=0;i< people.length;i++){
-            if(people[i]>limit/2){
-                answer+= people.length-i;
+            list.add(people[i]);
+        }
+
+        int i=1;
+
+        while(list.size()>1){
+            if(list.get(0)>limit/2||list.get(0)+list.get(1)>limit){
+                answer+=list.size();
                 break;
             }
-            else if(people[i]<0){
-                continue;
+            else if(list.get(0)+list.get(i)>limit){
+                answer++;
+                list.remove(i-1);
+                list.remove(0);
+                i=1;
             }
-            for(int j=people.length-1;j>=0;j--){
-                if(people[i]<0||people[j]<0){
-                    continue;
-                }
-                else if(i==j){
-                    continue;
-                }
-                else if(people[i]+people[j]<=limit){
-                    answer++;
-                    people[i]=-1;
-                    people[j]=-1;
-                    break;
-                }
+            else{
+                i++;
             }
-        }
-        
-        for(int i=0;i<people.length;i++){
-            if(people[i]<=limit/2&&0<people[i]) answer++;
         }
 
 
@@ -40,5 +36,4 @@ class Solution {
     }
 }
 
-//답도 틀리고 시간초과도 됨. 역순으로 하고 거꾸로 뒤져보면서 limit/2넘으면 없애는게 나을듯.
-//항상 limit = 10 {2,4,6,8} 하면 2가 나오는 경우를 생각하면서 문제를 풀어야 함.
+//이제는 시간초과만 나오는데 여기서 얶덖계 더 줄여요
