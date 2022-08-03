@@ -1,0 +1,32 @@
+import  java.util.*;
+
+class Solution {
+    public int[] solution(long begin, long end) {
+        int[] answer = new int [(int) (end-begin+1)];
+        int [] temp = new int [(int)(end+1)];
+
+        int i=1;
+        int idx=2;
+        while(true){
+            if(i*idx<=end){
+                temp[i*idx-1]=i;
+                idx++;
+            }
+            else{
+                i++;
+                idx=2;
+            }
+            if(i>end/2){
+                break;
+            }
+        }
+        int x=0;
+        for(int k =(int)(begin-1); k<end; k++){
+            answer[x]=temp[k];
+            x++;
+        }
+        return answer;
+    }
+}
+
+//메모리 초과랑 시간 초과 나옴 
