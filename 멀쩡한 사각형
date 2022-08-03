@@ -1,0 +1,8 @@
+class Solution {
+    public long solution(int w, int h) {
+        long answer = 1;
+        long tmp = (long)w*(long)h;
+        //홀짞일 때 생각해보자 가로가 홀수, 세로가 홀수, 둘 다 홀수, 둘다 짝수면 쉽게 풀 듯?
+        return answer;
+    }
+}
