@@ -1,0 +1,26 @@
+import  java.util.*;
+class Solution {
+    public int[][] solution(int[][] arr1, int[][] arr2) {
+        int[][] answer = new int[arr1.length][arr2[0].length];
+        int x=0;
+        int y=0;
+        while(true){
+            int sum=0;
+            for(int i=0;i<arr1[0].length;i++){
+                    sum+=arr1[x][i]*arr2[i][y];
+            }
+            answer[x][y]=sum;
+            if(y!=arr2[0].length-1) {
+                y++;
+            }
+            else{
+                y=0;
+                x++;
+            }
+            if(x==arr1.length){
+                break;
+            }
+        }
+        return answer;
+    }
+}
