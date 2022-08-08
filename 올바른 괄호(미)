@@ -1,0 +1,29 @@
+import  java.util.*;
+class Solution {
+    boolean solution(String s) {
+        boolean answer = true;
+        String [] tmp = s.split("");
+        //시작부터 틀리면 바로 끝내버림
+        if(tmp[0].equals(")")||tmp[tmp.length-1].equals("(")||tmp.length%2!=0){
+            answer = false;
+            return answer;
+        }
+
+        else {
+            int count_1 = 0;
+            int count_2 = 0;
+            for (int i = 0; i < tmp.length; i++) {
+                if (tmp[i].equals("(")) count_1++;
+                else count_2++;
+                if(count_2>count_1){
+                    answer=false;
+                    break;
+                }
+            }
+
+            return answer;
+        }
+    }
+}
+
+//시간초과가 나온다
