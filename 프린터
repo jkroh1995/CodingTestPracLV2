@@ -1,0 +1,65 @@
+import  java.util.*;
+class Solution {
+    public int solution(int[] priorities, int location) {
+        int answer = 0;
+        List<Integer>tmp = new ArrayList<>();
+        List<Integer>idx = new ArrayList<>();
+        for(int i=0;i< priorities.length;i++){
+            tmp.add(priorities[i]);
+            idx.add(i);
+        }
+        while(idx.contains(location)==true){
+            for(int i=1;i<tmp.size();i++){
+                if(tmp.get(i)>tmp.get(0)){
+                    tmp.add(tmp.get(0));
+                    tmp.remove(0);
+                    idx.add(idx.get(0));
+                    idx.remove(0);
+                    break;
+                }
+                else if(i==tmp.size()-1&&tmp.get(i)<=tmp.get(0)){
+                    tmp.remove(0);
+                    idx.remove(0);
+                    answer++;
+                }
+            }
+        }
+
+        return answer;
+    }
+}
+
+//시간초과 뜸
+
+//푼 코드 : 처음부터 끝까지 보고, list를 계속 변동하고 answer에도 연산이 계속 발생해 시간 초과가 발생하니, idx가 1씩 늘어나게 설정하고 answer연산을 1회로 한정해 시간 제한을 해결
+
+import  java.util.*;
+class Solution {
+    public int solution(int[] priorities, int location) {
+        int answer = 0;
+        List<Integer>tmp = new ArrayList<>();
+        List<Integer>idx = new ArrayList<>();
+        for(int i=0;i< priorities.length;i++){
+            tmp.add(priorities[i]);
+            idx.add(i);
+        }
+        int i=0;
+        while(i<tmp.size()-1){
+            for(int j=i+1;j<tmp.size();j++){
+                if(tmp.get(j)>tmp.get(i)){
+                    tmp.add(tmp.get(i));
+                    tmp.remove(i);
+                    idx.add(idx.get(i));
+                    idx.remove(i);
+                    break;
+                }
+                else if(j==tmp.size()-1&&tmp.get(j)<=tmp.get(i)){
+                    i++;
+                    break;
+                }
+            }
+        }
+        answer = idx.indexOf(location)+1;
+        return answer;
+    }
+}
