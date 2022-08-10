@@ -1,0 +1,44 @@
+import  java.util.*;
+class Solution {
+    public int[] solution(int[] progresses, int[] speeds) {
+        int[] answer = {};
+        List<Integer> result = new ArrayList<>();
+        List<Integer> pro = new ArrayList<>();
+        List<Integer> spd = new ArrayList<>();
+        for(int i=0;i< progresses.length;i++){
+            pro.add(progresses[i]);
+            spd.add(speeds[i]);
+        }
+        int cnt=0;
+        while(pro.size()>0){
+            for(int i=0;i<pro.size();i++){
+                pro.set(i, pro.get(i)+spd.get(i));
+            }
+            while(true) {
+                if (pro.get(0) >= 100) {
+                    pro.remove(0);
+                    spd.remove(0);
+                    cnt++;
+                    if (pro.size() == 0) {
+                        result.add(cnt);
+                        break;
+                    }
+                } else {
+                    if (cnt != 0) {
+                        result.add(cnt);
+                        cnt = 0;
+                        break;
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+        }
+        answer= new int [result.size()];
+        for(int i=0;i< answer.length;i++){
+            answer[i]=result.get(i);
+        }
+        return answer;
+    }
+}
