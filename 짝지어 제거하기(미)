@@ -1,0 +1,42 @@
+import java.util.*;
+class Solution{
+    public int solution(String s)    {
+        int answer = -1;
+        List<Character>list = new ArrayList<>();
+        for(int i=0;i<s.length();i++){
+            list.add(s.charAt(i));
+        }
+        int [] tmp = new int[26];
+        for(int i=0;i<list.size();i++){
+            int j=list.get(i);
+            tmp[j-97]++;
+        }
+        int cnt=0;
+        for(int i=0;i<tmp.length;i++){
+            if(tmp[i]%2!=0){
+                cnt=1;
+                answer = 0;
+                break;
+            }
+        }
+
+        while(cnt==0){
+            int idx=0;
+            for(int i=0;i<list.size()-1;i++){
+                if(list.get(i)==list.get(i+1)){
+                    list.remove(i);
+                    list.remove(i);
+                    idx=1;
+                }
+            }
+            if(idx==0) break;
+        }
+
+        if(cnt==0&&list.size()==0) answer=1;
+        else answer=0;
+
+        return answer;
+    }
+}
+
+//시간초과 이슈
