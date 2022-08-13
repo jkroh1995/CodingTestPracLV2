@@ -1,0 +1,29 @@
+import java.util.*;
+class Solution {
+    public int solution(int bridge_length, int weight, int[] truck_weights) {
+        int answer = 0;
+        int [] tmp = new int[bridge_length];
+        int idx=truck_weights[truck_weights.length-1];
+        int cnt=0;
+
+        while(true){
+            int sum=0;
+            int k=truck_weights[truck_weights.length-1];
+            answer++;
+            for(int i=tmp.length-2;i>=0;i--){
+                tmp[i+1]=tmp[i];
+            }
+            tmp[0]=0;
+            for(int i=0;i<tmp.length;i++){
+                sum+=tmp[i];
+            }
+            if(sum+truck_weights[cnt]<=weight){
+                tmp[0]=truck_weights[cnt];
+                truck_weights[cnt]=0;
+                if(cnt<truck_weights.length-1){cnt++;}
+            }
+            if(sum+k==0) break;
+        }
+        return answer;
+    }
+}
