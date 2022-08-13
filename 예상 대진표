@@ -1,0 +1,57 @@
+import java.util.*;
+class Solution{
+    static double baseLog(double x, double base) {
+        return Math.log10(x) / Math.log10(base);
+    }
+    public int solution(int n, int a, int b)    {
+        int answer = 0;
+        //무조건 b가 더 크게 만듦
+        if(a>b){
+            int k=b;
+            b=a;
+            a=k;
+        }
+        //a와 b의 범위 탐색
+        double log_a = baseLog(a, 2);
+        double log_b = baseLog(b, 2);
+        if(log_a%1==0){
+            log_a=log_a-0.001;
+        }
+        if(log_b%1==0){
+            log_b=log_b-0.001;
+        }
+
+        //a와 b가 같은 지수 범위 내에 있지 않을 때
+        if((int)log_b-(int)log_a!=0) {
+            while (!(n>=a && n< b)) {
+                n = n / 2;
+            }
+            //a와 b의 중간 지점으로 n을 바꾼다.
+            int x = (int) baseLog(n, 2);
+            answer=x+1;
+        }
+        //a와 b가 같은 지수 범위 내에 있을 때
+        else {
+            int x = (int) baseLog(n, 2);
+            //a와 b를 1~x의 사이로 바꿔준다
+            a = a - (int) Math.pow(2, x - 1);
+            b = b - (int) Math.pow(2, x - 1);
+
+            log_a = baseLog(a, 2);
+            log_b = baseLog(b, 2);
+            if (log_a % 1 == 0) {
+                log_a = log_a - 0.001;
+            }
+            if (log_b % 1 == 0) {
+                log_b = log_b - 0.001;
+            }
+            while (!(n >= a && n < b)) {
+                n = n / 2;
+            }
+            //a와 b의 중간 지점으로 n을 바꾼다.
+            x = (int) baseLog(n, 2);
+            answer = x + 1;
+        }
+            return answer;
+    }
+}
