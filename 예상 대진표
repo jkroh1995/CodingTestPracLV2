@@ -1,3 +1,5 @@
+//지수 형태로 풀어봤다. 
+
 import java.util.*;
 class Solution{
     static double baseLog(double x, double base) {
@@ -53,5 +55,54 @@ class Solution{
             answer = x + 1;
         }
             return answer;
+    }
+}
+
+//정답코드
+
+import java.util.*;
+class Solution{
+    public int solution(int n, int a, int b)    {
+        int answer = 1;
+        if(a>b){
+            int k=b;
+            b=a;
+            a=k;
+        }
+        while(!(a%2==1&&b==a+1)){
+            answer++;
+            a=(a+1)/2;
+            b=(b+1)/2;
+        }
+        return answer;
+    }
+}
+
+//썼다 틀린 코드 - if-else 지랄할 필요가 전혀 없다.
+import java.util.*;
+class Solution{
+    public int solution(int n, int a, int b)    {
+        int answer = 1;
+        if(a>b){
+            int k=b;
+            b=a;
+            a=k;
+        }
+        while(!(a%2==1&&b==a+1)){
+            answer++;
+            if(a%2!=0){
+                a=(a+1/2);
+            }
+            else{
+                a=a/2;
+            }
+            if(b%2!=0){
+                b=(b+1)/2;
+            }
+            else{
+                b=b/2;
+            }
+        }
+        return answer;
     }
 }
