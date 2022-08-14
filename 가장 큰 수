@@ -1,0 +1,24 @@
+import java.util.*;
+class Solution {
+    public String solution(int[] numbers) {
+        String answer = "";
+        String [] tmp = new String[numbers.length];
+        for(int i=0;i< tmp.length;i++){
+            tmp[i]=String.valueOf(numbers[i]);
+        }
+        Arrays.sort(tmp);
+        //핵심 알고리즘을 찾아보아요. 첫 자리가 같으면 그 다음거를 비교해야함.
+        for(int i=0;i<tmp.length-1;i++){
+            if()
+        }
+        
+        
+        //이제 거꾸로 받음
+        String [] list = new String[tmp.length];
+        for(int i=0;i<tmp.length;i++){
+            list[i]=tmp[numbers.length-i-1];
+        }
+        answer = String.join("",list);
+        return answer;
+    }
+}
