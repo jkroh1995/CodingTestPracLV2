@@ -1,0 +1,27 @@
+import  java.util.*;
+
+class Solution {
+    public String[] solution(String[] record) {
+        String[] answer = {};
+        HashMap<String, String> tmp = new HashMap<>();
+        List <String> list = new ArrayList<>();
+        for(int i=0;i< record.length;i++){
+            String[] a = record[i].split(" ");
+            if(!a[0].equals("Leave"))
+            tmp.put(a[1],a[2]);
+        }
+        for(int i=0;i<record.length;i++){
+            String [] a = record[i].split(" ");
+            if(record[i].charAt(0)=='E'){
+                list.add(tmp.get(a[1])+"님이 들어왔습니다.");
+            }
+            else if(record[i].charAt(0)=='L'){
+                list.add(tmp.get(a[1])+"님이 나갔습니다.");
+            }
+        }
+
+        answer = list.toArray(new String[list.size()]);
+        
+        return answer;
+    }
+}
