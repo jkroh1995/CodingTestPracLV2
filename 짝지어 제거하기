@@ -40,3 +40,31 @@ class Solution{
 }
 
 //시간초과 이슈
+
+//정답코드 - 스택의 형태로 풀었다. 스택이 뭔지 몰랐는데, 스택과 같은 구조로 반복문을 O(n)으로 줄였다.
+
+import java.util.*;
+
+class Solution{
+    public int solution(String s)    {
+        int answer = -1;
+        int cnt=0;
+        List<Character>list = new ArrayList<>();
+        for(int i=0;i<s.length();i++){
+            list.add(s.charAt(i));
+            if(cnt>0){
+                if(list.get(cnt)==list.get(cnt-1)){
+                    list.remove(cnt-1);
+                    list.remove(cnt-1);
+                    cnt=cnt-2;
+                }
+            }
+            cnt++;
+        }
+
+        if(list.size()==0) answer=1;
+        else answer=0;
+
+        return answer;
+    }
+}
