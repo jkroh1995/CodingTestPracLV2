@@ -9,24 +9,23 @@ class Solution {
             tmp.add(scoville[i]);
         }
         int idx=0;
-        int j=0;
         while(true) {
-            for (int i = j; i < tmp.size(); i++) {
-                if (tmp.get(i) < K) {
-                    tmp.add(i+2, tmp.get(i) + tmp.get(i+1) * 2);
-                    tmp.remove(i);
-                    tmp.remove(i);
-                    answer++;
-                    j=i;
-                    break;
-                }
-                if(i==tmp.size()-1&&tmp.get(i)>=K){
-                    idx=1;
-                    break;
-                }
+            if(tmp.get(0)<K){
+                int a = tmp.get(0);
+                int b = tmp.get(1);
+                tmp.remove(0);
+                tmp.remove(0);
+                tmp.add(0,a+2*b);
+                answer++;
+                tmp.sort(Comparator.naturalOrder());
             }
-            if(idx==1) break;
+            else break;
+            if(tmp.size()==1&&tmp.get(0)<K) {answer=-1; break;}
         }
+
+
         return answer;
     }
 }
+
+//런타임 에러는 다 해결. 시간 문제만 해결하면 된다.
