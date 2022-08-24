@@ -3,23 +3,32 @@ import java.util.List;
 
 class Solution {
     public int[] solution(int n, long left, long right) {
-        int[] answer = {};
+        int[] answer = new int[(int) (right-left+1)];
         //2차원 배열 - 규칙은 알고 있음
-        long [][] tmp = new long[n][n];
-        List<Long> list = new ArrayList<>();
-        //첫줄 먼저 채워
+        int [][] tmp = new int[n][n];
+        List<Integer> list = new ArrayList<>();
+        
+        //2차원 배열 채움
         for(int i=0;i<n;i++){
-                tmp[0][i]=i+1;
-        }
-        //나머지 줄 채워야 하는데.
-        for(int i=1;i<n;i++){
             for(int j=0;j<n;j++){
-                
+                if(j<=i){ tmp[i][j]=i+1;}
+                else{tmp[i][j]=tmp[i][j-1]+1;}
             }
+        }
+        
+        //list에 담음
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){ list.add(tmp[i][j]); }
+        }
+        //left~right을 담을 list를 만들고 담음
+        for(long i=left;i<right+1;i++){
+            kk.add(list.get((int) i));
+        }
+        for(int i=0;i<answer.length;i++){
+            answer[i]=kk.get(i);
         }
         return answer;
     }
 }
 
-//저 규칙을 어떻게 구현할까. 구현만 하면 순서대로 넣고 하면 될 듯
-i j 의 이중 포문을 짜서 j가 i+1까지는 1,2,3 그대로 넣고 그 다음에는 ++ 하면 되지 않을까?
+//메모리 초과 이슈 발생 - 
