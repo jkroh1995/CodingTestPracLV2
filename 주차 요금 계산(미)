@@ -30,55 +30,65 @@ class Solution {
         //요금계산
         int idx=0;
         int time=0;
-        for(int i=0;i<aa.length-1;i++){
-            String [] tmp1 = aa[i].split(" ");
-            String [] tmp2 = aa[i+1].split(" ");
-            if(tmp1[0].equals(tmp2[0])){
-                if(tmp1[2].equals("IN")){
-                    time=time+Integer.parseInt(tmp2[1])/100*60+Integer.parseInt(tmp2[1])%100-Integer.parseInt(tmp1[1])/100*60+Integer.parseInt(tmp1[1])%100;
-                    if(i==aa.length-2){
-                        if(time-fees[0]>0){
-                            answer[idx]= fees[1]+(int)(Math.ceil((double)time-fees[0]/fees[2])*fees[3]);
+        if(aa.length==1){
+            String[] tmp1 = aa[0].split(" ");
+            time = time + 23 * 60 + 59 - Integer.parseInt(tmp1[1]) / 100 * 60 - Integer.parseInt(tmp1[1]) % 100;
+            if (time - fees[0] > 0) {
+                answer[idx] = fees[1] + (int) (Math.ceil((double) (time - fees[0]) / fees[2]) * fees[3]);
+            } else {
+                answer[idx] = fees[1];
+            }
+        }
+        else {
+            for (int i = 0; i < aa.length; i++) {
+                String[] tmp1 = aa[i].split(" ");
+                String[] tmp2 = aa[i + 1].split(" ");
+                if (tmp1[0].equals(tmp2[0])) {
+                    if (tmp1[2].equals("IN")) {
+                        time = time + Integer.parseInt(tmp2[1]) / 100 * 60 + Integer.parseInt(tmp2[1]) % 100 - Integer.parseInt(tmp1[1]) / 100 * 60 - Integer.parseInt(tmp1[1]) % 100;
+                        if (i == aa.length - 2) {
+                            if (time - fees[0] > 0) {
+                                answer[idx] = fees[1] + (int) (Math.ceil((double) (time - fees[0]) / fees[2]) * fees[3]);
+                            } else {
+                                answer[idx] = fees[1];
+                            }
+                            break;
                         }
-                        else{
-                            answer[idx]=fees[1];
-                        }
-                        time=0;
+                    } else {
+                        if (i == aa.length - 2) {
+                            time = time + 23 * 60 + 59 - Integer.parseInt(tmp2[1]) / 100 * 60 - Integer.parseInt(tmp2[1]) % 100;
+                            if (time - fees[0] > 0) {
+                                answer[idx] = fees[1] + (int) (Math.ceil((double) (time - fees[0]) / fees[2]) * fees[3]);
+                            } else {
+                                answer[idx] = fees[1];
+                            }
+                            break;
+                        } else
+                            continue;
+                    }
+                } else {
+                    if (tmp1[2].equals("IN")) {
+                        time = time + 23 * 60 + 59 - Integer.parseInt(tmp1[1]) / 100 * 60 - Integer.parseInt(tmp1[1]) % 100;
+                        if (time - fees[0] > 0) {
+                            answer[idx] = fees[1] + (int) (Math.ceil((double) (time - fees[0]) / fees[2]) * fees[3]);
+                        } else answer[idx] = fees[1];
+                        time = 0;
+                        idx++;
+                    } else if (tmp1[2].equals("OUT")) {
+                        if (time - fees[0] > 0) {
+                            answer[idx] = fees[1] + (int) (Math.ceil((double) (time - fees[0]) / fees[2]) * fees[3]);
+                        } else answer[idx] = fees[1];
+                        time = 0;
                         idx++;
                     }
-                }
-                else{
-                    continue;
-                }
-            }
-            else{
-                if(tmp1[2].equals("IN")){
-                    time=time+23*60+59-Integer.parseInt(tmp1[1])/100*60+Integer.parseInt(tmp1[1])%100;
-                    if(time-fees[0]>0){
-                        answer[idx]= fees[1]+(int)(Math.ceil(time-fees[0]/fees[2])*fees[3]);
-                    }
-                    else answer[idx]=fees[1];
-                    time=0;
-                    idx++;
-                }
-                else if(tmp1[2].equals("OUT")){
-                    time=time+Integer.parseInt(tmp2[1])/100*60+Integer.parseInt(tmp2[1])%100-Integer.parseInt(tmp1[1])/100*60+Integer.parseInt(tmp1[1])%100;
-                    if(time-fees[0]>0){
-                        answer[idx]= fees[1]+(int)(Math.ceil(time-fees[0]/fees[2])*fees[3]);
-                    }
-                    else answer[idx]=fees[1];
-                    time=0;
-                    idx++;
+
                 }
 
             }
-
         }
-
-
 
         return answer;
     }
 }
 
-//뭔가 계산 식에 오류가 있음-디버깅 하면서 
+//런타임 에러 6,7,9,11,12
