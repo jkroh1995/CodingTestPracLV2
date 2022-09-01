@@ -1,0 +1,15 @@
+import java.util.Arrays;
+
+class Solution {
+    public int solution(int N, int[][] road, int K) {
+        int answer = 0;
+        
+        //단박에 연결될 때
+        for(int i=0;i<road.length;i++){
+            int [] tmp = road[i];
+            if(tmp[0]==1&&tmp[2]<=K) answer++;
+        }
+
+        return answer;
+    }
+}
