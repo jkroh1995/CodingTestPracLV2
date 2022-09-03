@@ -1,0 +1,23 @@
+class Solution {
+    public int[] solution(String s) {
+        int[] answer = new int[2];
+        int cnt=0;
+        int idx=0;
+        while(!s.equals("1")){
+            int tmp =0;
+            for(int i=0;i<s.length();i++){
+                if(s.charAt(i)==48){
+                    tmp++;
+                }
+            }
+            cnt=cnt+tmp;
+            s=s.replace("0","");
+            tmp = s.length();
+            s= Integer.toBinaryString(tmp);
+            idx++;
+        }
+        answer[0]=idx;
+        answer[1]=cnt;
+        return answer;
+    }
+}
