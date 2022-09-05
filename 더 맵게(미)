@@ -29,3 +29,51 @@ class Solution {
 }
 
 //런타임 에러는 다 해결. 시간 문제만 해결하면 된다.
+
+//2차 코드 - 메모리 이슈 발생 씨발 어쩌라고~
+
+import  java.util.*;
+
+class Solution {
+    public int solution(int[] scoville, int K) {
+        int answer = 0;
+        Arrays.sort(scoville);
+        List<Integer>tmp = new ArrayList<>();
+        for(int i=0;i<scoville.length;i++){
+            tmp.add(scoville[i]);
+        }
+        int idx=0;
+        while(true) {
+            if(tmp.get(0)<K&&tmp.size()>1){
+                int a = tmp.get(0);
+                int b = tmp.get(1);
+                tmp.remove(0);
+                tmp.remove(0);
+                int x=a+2*b;
+                if(tmp.size()!=0) {
+                    for (int i = 0; i < tmp.size(); i++) {
+                        if (x < tmp.get(i)) {
+                            tmp.add(i, x);
+                            break;
+                        }
+                        else if(i==tmp.size()-1&&x>=tmp.get(i)){
+                            tmp.add(x);
+                        }
+                    }
+                }
+                else{
+                    tmp.add(0,x);
+                }
+                answer++;
+            }
+            else {
+                if(tmp.get(0)<K) {answer=-1; break;}
+                else{break;}
+            }
+
+        }
+
+
+        return answer;
+    }
+}
