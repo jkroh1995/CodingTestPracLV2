@@ -30,7 +30,7 @@ class Solution {
 
 //런타임 에러는 다 해결. 시간 문제만 해결하면 된다.
 
-//2차 코드 - 메모리 이슈 발생 씨발 어쩌라고~
+//2차 코드 - 다음에는 priority queue를 공부해서 
 
 import  java.util.*;
 
