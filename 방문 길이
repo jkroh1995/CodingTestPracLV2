@@ -1,0 +1,43 @@
+import java.util.*;
+
+class Solution {
+    public int solution(String dirs) {
+        int answer = 0;
+        String [] k = dirs.split("");
+        ArrayList<int[]> list = new ArrayList<int[]>();
+        int x=0;
+        int y=0;
+        for(int i=0;i<k.length;i++){
+            if(k[i].equals("U")&&y<5){
+                y++;
+                int [] tmp = {x,y};
+                list.add(tmp);
+            }
+            else if(k[i].equals("D")&&y>-5){
+                y--;
+                int [] tmp = {x,y};
+                list.add(tmp);
+            }
+            else if(k[i].equals("L")&&x>-5){
+                x--;
+                int [] tmp = {x,y};
+                list.add(tmp);
+            }
+            else if(k[i].equals("R")&&x<5){
+                x++;
+                int [] tmp = {x,y};
+                list.add(tmp);
+            }
+            else continue;
+        }
+        //중복 제거
+        Set <int[]> a = new HashSet<>(list);
+        ArrayList <int []> b= new ArrayList<>(a);
+
+        answer= b.size();
+
+        return answer;
+    }
+}
+
+//중복 처리 해결해야함,
