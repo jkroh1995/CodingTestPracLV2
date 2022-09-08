@@ -32,3 +32,22 @@ class Solution {
 }
 
 //메모리 초과 이슈 발생 // 2차원 배열을 없앴는데도 메모리 초과 발생
+
+//정답코드 - 배열에 담아서 메모리 초과가 발생했으니 그냥 규칙으로 바로 answer에 담는다
+
+class Solution {
+    public int[] solution(int n, long left, long right) {
+        int [] answer = new int[(int) (right-left+1)];
+
+        long start=left;
+        for(int i=0;i<(int)(right-left+1);i++){
+            long x = start/n;
+            long y = start%n;
+            if(x>=y) answer[i] = (int)(x+1);
+            else answer[i]=(int)(y+1);
+            start++;
+        }
+        
+        return answer;
+    }
+}
