@@ -1,0 +1,32 @@
+class Solution {
+     static String radix(int num, int n) {
+        StringBuilder sb = new StringBuilder();
+
+        if (num == 0) return "0";
+
+        while (num > 0) {            
+            if (num % n < 10) {
+                sb.append(num % n);
+            } else {
+                sb.append((char)(num%n-10 + 'A'));
+            }
+            num /= n;
+        }
+        return sb.reverse().toString();
+    }
+    public String solution(int n, int t, int m, int p) {
+        String answer = "";
+        String tmp="";
+        int idx=0;
+        while(tmp.length()<t*m){
+            tmp+=radix(idx,n);
+            idx++;
+        }
+        idx=0;
+        while(answer.length()!=t){
+            answer+=String.valueOf(tmp.charAt(idx*m+p-1));
+            idx++;
+        }
+        return answer;
+    }
+}
