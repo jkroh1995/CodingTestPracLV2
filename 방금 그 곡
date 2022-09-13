@@ -1,0 +1,40 @@
+class Solution {
+    public String solution(String m, String[] musicinfos) {
+        String answer = "";
+        for(int i=0;i< musicinfos.length;i++){
+            musicinfos[i]=musicinfos[i].replace(":","");
+            String [] tmp = musicinfos[i].split(",");
+            int x = Integer.parseInt(tmp[0]);
+            int y = Integer.parseInt(tmp[1]);
+            int k = y/100*60+y%100-x/100*60-x%100;
+            for(int j=0;j<tmp[3].length();j++){
+                if(tmp[3].charAt(j)=='#') k++;
+            }
+            if(tmp[3].length()>k){
+                tmp[3]=tmp[3].substring(0,k+1);
+            }else{
+                while(tmp[3].length()<k){
+                    tmp[3]=tmp[3]+tmp[3];
+                }
+                if(tmp[3].length()>k){
+                    tmp[3]=tmp[3].substring(0,k+1);
+                }
+            }
+            musicinfos[i]=tmp[2]+","+tmp[3];
+        }
+
+        for(int i=0;i<musicinfos.length;i++){
+            String [] tmp=musicinfos[i].split(",");
+            if(musicinfos[i].contains(m)){
+                answer = tmp[0];
+            }
+        }
+
+        if(answer.equals("")){
+            answer="(None)";
+        }
+        return answer;
+    }
+}
+
+//몇 개 테스트케이스 실패
