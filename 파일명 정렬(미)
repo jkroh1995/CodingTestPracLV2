@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.regex.Pattern;
+
+class Solution {
+    public String[] solution(String[] files) {
+        String[] answer = {};
+        StringTokenizer st = new StringTokenizer(files[0],"123456789",true);
+        List<String> list = new ArrayList<>();
+        int i=0;
+        while(st.hasMoreTokens()){
+            if(!st.nextToken().equals("^[0-9]*$")){
+                list.add(st.nextToken());
+            }
+            else{
+                if(i==1) {
+                    list.add(st.nextToken());
+                }
+                else{
+                    i--;
+                    String s = list.get(i);
+                    list.remove(i);
+                    list.add(s+st.nextToken());
+                }
+            }
+            i++;
+        }
+
+        return answer;
+    }
+}
+
+//String Tokenizer는 어떻게 돌아가는가
