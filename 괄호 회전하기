@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    public int solution(String s) {
+        int answer = 0;
+        StringBuilder sb = new StringBuilder(s);
+        int i=0;
+        while(i!=s.length()){
+            String k = String.valueOf(s.charAt(i));
+            sb.delete(0,1);
+            sb.append(k);
+            String tmp=sb.toString();
+            List<Character> list = new ArrayList<>();
+            int cnt=0;
+            for(int j=0;j<s.length();j++){
+                list.add(tmp.charAt(j));
+                if(cnt>0){
+                    if(list.get(cnt)==')'&&list.get(cnt-1)=='('){
+                        list.remove(cnt-1);
+                        list.remove(cnt-1);
+                        cnt=cnt-2;
+                    }
+                    else if(list.get(cnt)=='}'&&list.get(cnt-1)=='{'){
+                        list.remove(cnt-1);
+                        list.remove(cnt-1);
+                        cnt=cnt-2;
+                    }
+                    else if(list.get(cnt)==']'&&list.get(cnt-1)=='['){
+                        list.remove(cnt-1);
+                        list.remove(cnt-1);
+                        cnt=cnt-2;
+                    }
+                }
+                cnt++;
+            }
+            if(list.size()==0) answer++;
+            i++;
+        }
+        return answer;
+    }
+}
+
+//스택 공부를 해야겠구만
