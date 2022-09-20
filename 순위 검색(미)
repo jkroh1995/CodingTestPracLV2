@@ -1,24 +1,32 @@
+import java.util.ArrayList;
+
 class Solution {
     public int[] solution(String[] info, String[] query) {
         int[] answer = new int[query.length];
-        for(int i=0;i<info.length;i++){
-            String [] tmp = info[i].split(" ");
-            for(int j=0;j< query.length;j++){
-                query[j]=query[j].replace("and","");
-                query[j]=query[j].replace("  "," ");
-                String [] idx = query[j].split(" ");
-                for(int k=0;k<tmp.length;k++){
-                    if(k!=tmp.length-1&&!tmp[k].equals(idx[k])&&!idx[k].equals("-")){
-                        break;
+
+
+        for(int i=0;i< query.length;i++){
+            query[i]=query[i].replace("and","");
+            query[i]=query[i].replace("  "," ");
+            String [] idx = query[i].split(" ");
+            int standard = Integer.parseInt(idx[4]);
+            for(int j=0;j<info.length;j++){
+                String [] tmp = info[j].split(" ");
+                int score = Integer.parseInt(tmp[4]);
+                if(score<standard) continue;
+                for(int k=0;k<tmp.length-1;k++){
+                    if(k!=tmp.length-2){
+                        if(!idx[k].equals(tmp[k])&&!idx[k].equals("-")) break;
                     }
-                    else if(k==tmp.length-1&&Integer.parseInt(tmp[k])>=Integer.parseInt(idx[k])){
-                        answer[j]++;
+                    else{
+                        if(idx[k].equals(tmp[k])||idx[k].equals("-")) answer[i]++;
                     }
                 }
             }
         }
+
         return answer;
     }
 }
 
-//시간초과 이슈 - O(n^3)이라서 무조건 발생할 수밖에 없음. 이걸 해결해야함.
+//시간초과 이슈 - O(n^3)이라서 무조건 발생할 수밖에 없음. 이걸 해결해야함. 씨발
