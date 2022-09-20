@@ -1,43 +1,65 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 class Solution {
     public int solution(String dirs) {
         int answer = 0;
-        String [] k = dirs.split("");
-        ArrayList<int[]> list = new ArrayList<int[]>();
+
         int x=0;
         int y=0;
+        int x2=0;
+        int y2=0;
+
+        String [] k = dirs.split("");
+        ArrayList<int[]> list = new ArrayList<>();
         for(int i=0;i<k.length;i++){
-            if(k[i].equals("U")&&y<5){
-                y++;
-                int [] tmp = {x,y};
+            if(k[i].equals("U")&&y2<5){
+                y2++;
+                int [] tmp = {x,y,x2,y2};
                 list.add(tmp);
+                y=y2;
+                for(int j=0;j<list.size();j++){
+                    if(j!=list.size()-1&&Arrays.equals(list.get(j),tmp)==true) break;
+                    else if(j==list.size()-1) answer++;
+                }
             }
-            else if(k[i].equals("D")&&y>-5){
-                y--;
-                int [] tmp = {x,y};
-                list.add(tmp);
+            else if(k[i].equals("D")&&y2>-5){
+                y2--;
+                int [] tmp = {x,y,x2,y2};
+                    list.add(tmp);
+                    y=y2;
+                for(int j=0;j<list.size();j++){
+                    if(j!=list.size()-1&&Arrays.equals(list.get(j),tmp)==true) break;
+                    else if(j==list.size()-1) answer++;
+                }
             }
-            else if(k[i].equals("L")&&x>-5){
-                x--;
-                int [] tmp = {x,y};
-                list.add(tmp);
+            else if(k[i].equals("L")&&x2>-5){
+                x2--;
+                int [] tmp = {x,y,x2,y2};
+                    list.add(tmp);
+                    x=x2;
+                for(int j=0;j<list.size();j++){
+                    if(j!=list.size()-1&&Arrays.equals(list.get(j),tmp)==true) break;
+                    else if(j==list.size()-1) answer++;
+                }
             }
-            else if(k[i].equals("R")&&x<5){
-                x++;
-                int [] tmp = {x,y};
-                list.add(tmp);
+            else if(k[i].equals("R")&&x2<5){
+                x2++;
+                int [] tmp = {x,y,x2,y2};
+                    list.add(tmp);
+                    x=x2;
+                for(int j=0;j<list.size();j++){
+                    if(j!=list.size()-1&&Arrays.equals(list.get(j),tmp)==true) break;
+                    else if(j==list.size()-1) answer++;
+                }
             }
             else continue;
         }
-        //중복 제거
-        Set <int[]> a = new HashSet<>(list);
-        ArrayList <int []> b= new ArrayList<>(a);
-
-        answer= b.size();
 
         return answer;
     }
 }
 
-//중복 처리 해결해야함,
+//테케 실패가 
