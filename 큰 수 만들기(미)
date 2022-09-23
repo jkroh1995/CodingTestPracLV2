@@ -15,33 +15,46 @@ class Solution {
         //이 부분 리스트로 다시해. 기준점은 첫번쨰 숫자. k만큼 반복하고 순서대로 첫번째 숫자보다 작은놈 있으면 제거.없으면 첫번째 제거 인덱스 만들어서 하면 됨.
         int size = list.size()-k;
         StringBuilder sb = new StringBuilder();
-            int idx = 1;
-            int cnt = 0;
-            while (list.size() != size) {
-                if (idx == list.size()) {
-                    list.remove(idx - 1);
-                    idx = 1;
-                    cnt = 0;
-                    continue;
-                } else if (list.get(idx) > list.get(cnt)) {
-                    list.remove(cnt);
-                    idx = 1;
-                    cnt = 0;
-                    continue;
-                } else {
-                    idx++;
-                    cnt++;
-                }
-
+        int idx = 1;
+        int cnt = 0;
+        while (list.size()!=size) {
+            if (idx == list.size()) {
+                list.remove(idx - 1);
+                idx = 1;
+                cnt = 0;
             }
-           
-                for (int i = 0; i < list.size(); i++) {
-                    sb.append(list.get(i));
+            else if(list.get(0)==9){
+                sb.append(9);
+                list.remove(0);
+                size--;
+            }
+            else if(list.get(idx)==9&&list.size()-idx>=size){
+                sb.append(9);
+                for(int i=0;i<idx+1;i++) {
+                    list.remove(0);
                 }
-                answer = sb.toString();
-            
+                idx=1;
+                cnt=0;
+                size--;
+            }else if (list.get(idx) > list.get(cnt)) {
+                list.remove(cnt);
+                idx=1;
+                cnt=0;
+            }
+            else {
+                idx++;
+                cnt++;
+            }
+        }
+        if(answer.length()!=size){
+            for(int i=0;i<size-answer.length();i++){
+                sb.append(list.get(i));
+            }
+        }
+        answer=sb.toString();
+
         return answer;
     }
 }
 
-//답은 다 맞는데 시간초과가 뜸. 99999999999999999999999999999999999999999991 이런 경우를 어떻게 처리해야할지를 좀 봐야 함.
+//아니 저거 진짜 마지막 시간초과 
