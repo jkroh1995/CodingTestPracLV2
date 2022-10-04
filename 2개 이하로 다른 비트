@@ -15,7 +15,7 @@ class Solution {
                     else{
                         String idx = Long.toBinaryString(k[i]);
                         String [] tmp = idx.split("0");
-                        k[i]=k[i]+tmp[tmp.length-1].length();
+                        k[i]= (long) (k[i]+Math.pow(2,tmp[tmp.length-1].length()-1));
                     }
                 }
             }
@@ -27,5 +27,3 @@ class Solution {
         return answer;
     }
 }
-
-//홀수 규칙 씨발 뭐지
