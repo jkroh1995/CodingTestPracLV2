@@ -5,6 +5,9 @@ import java.util.Locale;
 class Solution {
     public int solution(String str1, String str2) {
         int answer = 0;
+
+        //합,교 할 때 편하게 더 긴놈을 1번으로 만듦
+
         List<String> tmp1 = new ArrayList<>();
         List<String> tmp2 = new ArrayList<>();
 
@@ -36,11 +39,22 @@ class Solution {
             else i++;
         }
 
+
+        //합,교할 때 편하게 바꿈
+        List<String> a = tmp1;
+        List<String> b = tmp2;
+
+        if(b.size()>a.size()){
+            tmp1=b;
+            tmp2=a;
+        }
+
         //합집합
         String s = "";
         for(i=0;i<tmp1.size();i++){
             s+=tmp1.get(i)+",";
         }
+
         for(i=0;i<tmp2.size();i++){
             if(!s.contains(tmp2.get(i))){
                 s+=tmp2.get(i)+",";
@@ -55,6 +69,7 @@ class Solution {
         for(i=0;i<tmp1.size();i++){
             s+=tmp1.get(i)+",";
         }
+
         for(i=0;i<tmp2.size();i++){
             if(s.contains(tmp2.get(i))){
                 s1+=tmp2.get(i)+",";
@@ -68,3 +83,5 @@ class Solution {
         return answer;
     }
 }
+
+//이게 왜 
