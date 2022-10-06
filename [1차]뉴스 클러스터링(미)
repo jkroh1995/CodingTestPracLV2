@@ -1,0 +1,70 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+class Solution {
+    public int solution(String str1, String str2) {
+        int answer = 0;
+        List<String> tmp1 = new ArrayList<>();
+        List<String> tmp2 = new ArrayList<>();
+
+        //대소문자 상관없으니까 소문자로 바꿈
+        str1=str1.toLowerCase(Locale.ROOT);
+        str2=str2.toLowerCase(Locale.ROOT);
+
+        //2글자씩 잘라서 list에 담음
+        for(int i=0;i<str1.length()-1;i++){
+            tmp1.add(str1.substring(i,i+2));
+        }
+        for(int i=0;i<str2.length()-1;i++){
+            tmp2.add(str2.substring(i,i+2));
+        }
+
+        //영어 빼고 다 지움 - tmp.size()를 써야 하니까 while문으로
+        int i=0;
+        while(i<tmp1.size()){
+            if(tmp1.get(i).charAt(0)<97||tmp1.get(i).charAt(0)>122||tmp1.get(i).charAt(1)<97||tmp1.get(i).charAt(1)>122){
+                tmp1.remove(i);
+            }
+            else i++;
+        }
+        i=0;
+        while(i<tmp2.size()){
+            if(tmp2.get(i).charAt(0)<97||tmp2.get(i).charAt(0)>122||tmp2.get(i).charAt(1)<97||tmp2.get(i).charAt(1)>122){
+                tmp2.remove(i);
+            }
+            else i++;
+        }
+
+        //합집합
+        String s = "";
+        for(i=0;i<tmp1.size();i++){
+            s+=tmp1.get(i)+",";
+        }
+        for(i=0;i<tmp2.size();i++){
+            if(!s.contains(tmp2.get(i))){
+                s+=tmp2.get(i)+",";
+            }
+        }
+        String [] hap = s.split(",");
+        double hap_num = hap.length;
+
+        //교집합
+        s = "";
+        String s1="";
+        for(i=0;i<tmp1.size();i++){
+            s+=tmp1.get(i)+",";
+        }
+        for(i=0;i<tmp2.size();i++){
+            if(s.contains(tmp2.get(i))){
+                s1+=tmp2.get(i)+",";
+            }
+        }
+        String[]kyo=s1.split(",");
+        double kyo_num = kyo.length;
+
+        answer = (int) (kyo_num/hap_num*65536);
+
+        return answer;
+    }
+}
