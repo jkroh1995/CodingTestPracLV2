@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution {
+    public int solution(int k, int[] tangerine) {
+        int answer = 0;
+
+        Arrays.sort(tangerine);
+
+        List<Integer>size = new ArrayList<>();
+        int number = 1;
+        if(tangerine.length==1){
+            return 1;
+        }
+        for(int i=1;i< tangerine.length;i++){
+            if(tangerine[i]!=tangerine[i-1]){
+                size.add(number);
+                number=1;
+                if(i== tangerine.length-1){
+                    size.add(1);
+                }
+                continue;
+            }
+            if(i== tangerine.length-1){
+                size.add(number+1);
+            }
+            number++;
+        }
+
+        size.sort(Collections.reverseOrder());
+
+        int index= 0;
+        for (Integer integer : size) {
+            index += integer;
+            answer++;
+            if (index >= k) {
+                break;
+            }
+        }
+
+        return answer;
+    }
+}
