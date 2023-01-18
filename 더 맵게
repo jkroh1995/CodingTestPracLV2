@@ -1,0 +1,26 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[] scoville, int K) {
+        int answer = 0;
+        PriorityQueue<Integer> tmp = new PriorityQueue<>();
+        for (int i = 0; i < scoville.length; i++) {
+            tmp.add(scoville[i]);
+        }
+
+        while (tmp.size() > 1 && tmp.element() < K) {
+            int a = tmp.poll();
+            int b = tmp.poll();
+            if (tmp.size() == 0) {
+                if (a + 2 * b >= K) {
+                    return 1;
+                }
+                return -1;
+            }
+            tmp.add(a + 2 * b);
+            answer++;
+        }
+
+        return answer;
+    }
+}
