@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+class CircularList{
+    List<Integer> circularList = new ArrayList<>();
+
+    public void add(int element) {
+        circularList.add(element);
+    }
+
+    public int size() {
+        return circularList.size();
+    }
+
+    public int get(int index) {
+        if(index>=circularList.size()){
+            return circularList.get(index%circularList.size());
+        }
+        return circularList.get(index);
+    }
+}
+
+class Solution {
+    public int solution(int[] elements) {
+        CircularList circularList = new CircularList();
+
+        for (int element : elements) {
+            circularList.add(element);
+        }
+
+        Set<Integer> answerSet = new HashSet<>();
+
+        int length = 1;
+        for (int i = 0; i < circularList.size(); i++) {
+            int startIndex = 0;
+            while (startIndex<circularList.size()) {
+                int sum = 0;
+                for(int j = startIndex; j<startIndex+length; j++){
+                    sum+=circularList.get(j);
+                }
+                answerSet.add(sum);
+                startIndex++;
+            }
+            length++;
+        }
+
+        return answerSet.size();
+    }
+}
