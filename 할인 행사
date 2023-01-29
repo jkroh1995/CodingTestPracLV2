@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class Solution {
+    public int solution(String[] want, int[] number, String[] discount) {
+        int answer = 0;
+
+        Map<String, Integer> wantNumberMap = new HashMap<>();
+        for(int i=0;i<want.length;i++){
+            wantNumberMap.put(want[i], number[i]);
+        }
+
+        List<List<String>> dailyDiscountList = new ArrayList<>(); //각 날짜별로 10일간 어떻게 할인하는지
+
+        //각 요일별로 10일치 할인 리스트를 제작.
+        for (int i = 0; i < discount.length - 9; i++) { //10일 동안 가야하기 때문에 discount에서 9를 뺀만큼 리스트를 만들어 넣어야 함
+            List<String> dailyDiscount = new ArrayList<>();
+            for (int j = i; j < i + 10; j++) { //10일치 리스트를 담음.
+                dailyDiscount.add(discount[j]);
+            }
+            dailyDiscountList.add(dailyDiscount);
+        }
+
+        for (List<String> daily : dailyDiscountList) {
+            Map<String,Integer> tmpMap = new HashMap<>(wantNumberMap);;
+            for(int i=0;i<daily.size();i++){
+                if(!wantNumberMap.containsKey(daily.get(i))){
+                    break;
+                }
+                tmpMap.replace(daily.get(i), tmpMap.get(daily.get(i))-1);
+            }
+            int index = 0;
+            Collection<Integer> values = tmpMap.values();
+            for(int value : values){
+                if(value!=0){
+                    index = 1;
+                    break;
+                }
+            }
+            if(index==0){
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+}
