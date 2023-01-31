@@ -1,0 +1,42 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+class Solution {
+    public int solution(int cacheSize, String[] cities) {
+        int answer = 0;
+        if(cacheSize==0){
+            return cities.length*5;
+        }
+
+        for(int i=0;i<cities.length;i++){
+            cities[i] = cities[i].toLowerCase(Locale.ROOT);
+        }
+
+        List<String> cacheList = new ArrayList<>();
+        for (String city : cities) {
+            if (cacheList.size() < cacheSize) {
+                if (cacheList.contains(city)) {
+                    cacheList.remove(city);
+                    cacheList.add(city);
+                    answer++;
+                    continue;
+                }
+                cacheList.add(city);
+                answer += 5;
+                continue;
+            }
+            if (cacheList.contains(city)) {
+                cacheList.remove(city);
+                cacheList.add(city);
+                answer++;
+                continue;
+            }
+            cacheList.remove(0);
+            cacheList.add(city);
+            answer += 5;
+        }
+
+        return answer;
+    }
+}
