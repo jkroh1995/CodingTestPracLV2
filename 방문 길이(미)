@@ -1,65 +1,155 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-class Solution {
-    public int solution(String dirs) {
-        int answer = 0;
+class Point {
+    int x;
+    int y;
 
-        int x=0;
-        int y=0;
-        int x2=0;
-        int y2=0;
+    public Point(int x, int y){
+        this.x = x;
+        this.y =y;
+    }
 
-        String [] k = dirs.split("");
-        ArrayList<int[]> list = new ArrayList<>();
-        for(int i=0;i<k.length;i++){
-            if(k[i].equals("U")&&y2<5){
-                y2++;
-                int [] tmp = {x,y,x2,y2};
-                list.add(tmp);
-                y=y2;
-                for(int j=0;j<list.size();j++){
-                    if(j!=list.size()-1&&Arrays.equals(list.get(j),tmp)==true) break;
-                    else if(j==list.size()-1) answer++;
-                }
-            }
-            else if(k[i].equals("D")&&y2>-5){
-                y2--;
-                int [] tmp = {x,y,x2,y2};
-                    list.add(tmp);
-                    y=y2;
-                for(int j=0;j<list.size();j++){
-                    if(j!=list.size()-1&&Arrays.equals(list.get(j),tmp)==true) break;
-                    else if(j==list.size()-1) answer++;
-                }
-            }
-            else if(k[i].equals("L")&&x2>-5){
-                x2--;
-                int [] tmp = {x,y,x2,y2};
-                    list.add(tmp);
-                    x=x2;
-                for(int j=0;j<list.size();j++){
-                    if(j!=list.size()-1&&Arrays.equals(list.get(j),tmp)==true) break;
-                    else if(j==list.size()-1) answer++;
-                }
-            }
-            else if(k[i].equals("R")&&x2<5){
-                x2++;
-                int [] tmp = {x,y,x2,y2};
-                    list.add(tmp);
-                    x=x2;
-                for(int j=0;j<list.size();j++){
-                    if(j!=list.size()-1&&Arrays.equals(list.get(j),tmp)==true) break;
-                    else if(j==list.size()-1) answer++;
-                }
-            }
-            else continue;
-        }
+    public void setPoint(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
 
-        return answer;
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void plusY() {
+        y++;
+    }
+
+    public void minusY() {
+        y--;
+    }
+
+    public void minusX() {
+        x--;
+    }
+    public void plusX() {
+        x++;
+    }
+
+    public boolean isEqual(Point point) {
+        return x==point.getX()&&y==point.getY();
     }
 }
 
-//LRLRLRLRLR 하면 1이 나와야 하는데 2가 나온다. 이 부분을 어떻게 해결할까.
+class Route {
+    Point [] route = new Point[2];
+
+    public Route(Point point1, Point point2){
+        if(comparePoint(point1, point2)){
+          route[0] = point1;
+          route[1] = point2;
+          return;
+        }
+        route[0] = point2;
+        route[1] = point1;
+    }
+
+    private boolean comparePoint(Point point1, Point point2) {
+        int x1=point1.getX();
+        int y1=point1.getY();
+        int x2=point2.getX();
+        int y2=point2.getY();
+
+        if(x1<x2){
+            return true;
+        }
+        if(x1==x2){
+            if(y1<y2){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public boolean isEqual(Route inputRoute) {
+        return route[0].isEqual(inputRoute.getPoint1())&&route[1].isEqual(inputRoute.getPoint2());
+    }
+
+    private Point getPoint2() {
+        return route[1];
+    }
+
+    private Point getPoint1() {
+        return route[0];
+    }
+}
+
+class RouteList {
+
+    List<Route>routeList = new ArrayList<>();
+
+    public void add(Route route) {
+        if(!isDuplicated(route)){
+            routeList.add(route);
+        }
+    }
+
+    private boolean isDuplicated(Route inputRoute) {
+        for(Route route : routeList){
+            if(route.isEqual(inputRoute)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int size() {
+        return routeList.size();
+    }
+}
+
+class Solution {
+    public int solution(String dirs) {
+
+        Point point1 = new Point(0,0);
+        Point point2 = new Point(0,0);
+        RouteList routeList = new RouteList();
+
+        String [] k = dirs.split("");
+
+        for(int i=0;i<k.length;i++){
+            if(k[i].equals("U")&&point2.getY()<5){
+                point2.plusY();
+                Route route = new Route(new Point(point1.getX(), point1.getY()), new Point(point2.getX(), point2.getY()));
+                routeList.add(route);
+                point1.setPoint(point1.getX(), point2.getY());
+                continue;
+            }
+            if(k[i].equals("D")&&point2.getY()>-5){
+                point2.minusY();
+                Route route = new Route(new Point(point1.getX(), point1.getY()), new Point(point2.getX(), point2.getY()));
+                routeList.add(route);
+                point1.setPoint(point1.getX(), point2.getY());
+                continue;
+            }
+            if(k[i].equals("L")&&point2.getX()>-5){
+                point2.minusX();
+                Route route = new Route(new Point(point1.getX(), point1.getY()), new Point(point2.getX(), point2.getY()));
+                routeList.add(route);
+                point1.setPoint(point2.getX(), point1.getY());
+                continue;
+            }
+            if(k[i].equals("R")&&point2.getX()<5){
+                point2.plusX();
+                Route route = new Route(new Point(point1.getX(), point1.getY()), new Point(point2.getX(), point2.getY()));
+                routeList.add(route);
+                point1.setPoint(point2.getX(), point1.getY());
+            }
+        }
+
+        return routeList.size();
+    }
+}
