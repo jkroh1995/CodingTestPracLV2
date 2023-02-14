@@ -1,5 +1,5 @@
 class Solution {
-    public int isPrime(long n) {
+    public int isPrime(long n) { //1이면 소수, 0이면 소수가 아니다.
         if(n==1){
             return 0;
         }
