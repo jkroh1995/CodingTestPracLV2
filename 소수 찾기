@@ -1,0 +1,44 @@
+import java.util.*;
+
+class Solution {
+    Set<Integer>numberSet = new HashSet<>();
+    public int solution(String numbers) {
+        int answer = 0;
+        recursive("", numbers); // 재귀를 이용한 완전 탐색
+        numberSet.remove(1);
+        for(int num : numberSet){
+            if(num==0){
+                continue;
+            }
+            if(isPrime((long)num)==1){
+                answer++;
+            }
+        }
+
+
+        return answer;
+    }
+
+    private void recursive(String combination, String numbers) {
+        if(!combination.equals("")){
+            numberSet.add(Integer.parseInt(combination));
+        }
+        for(int i=0;i<numbers.length();i++){
+            recursive(combination+numbers.charAt(i), numbers.substring(0,i)+numbers.substring(i+1));
+        }
+    }
+
+    private int isPrime(long n) {
+        if(n==1){
+            return 0;
+        }
+        else{
+            for (int i = 2; i<=(int)Math.sqrt(n); i++) {
+                if (n % i == 0) {
+                    return 0;
+                }
+            }
+            return 1;
+        }
+    }
+}
