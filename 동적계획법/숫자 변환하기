@@ -32,3 +32,46 @@ class Solution {
         return -1;
     }
 }
+
+
+import java.util.*;
+
+class Solution {
+
+    public int solution(int x, int y, int n) {
+        if(x==y){
+            return 0;
+        }
+        Queue <Integer> queue = new LinkedList<>();
+        queue.add(x);
+        int count=0;
+        while(queue.size()!=0){
+            count++;
+            int size = queue.size();
+            int deleteCount=0;
+            while(deleteCount!=size){
+                int peek = queue.remove();
+                if(peek+n == y){
+                    return count;
+                }
+                if(peek*2 == y){
+                    return count;
+                }
+                if(peek*3 == y){
+                    return count;
+                }
+                if(peek+n<y&&!queue.contains(peek+n)){
+                    queue.add(peek+n);
+                }
+                if(peek*2<y&&!queue.contains(peek*2)){
+                    queue.add(peek*2);
+                }
+                if(peek*3<y&&!queue.contains(peek*3)){
+                    queue.add(peek*3);
+                }
+                deleteCount++;
+            }
+        }
+        return -1;
+    }
+}
