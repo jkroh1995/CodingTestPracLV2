@@ -3,7 +3,11 @@ import java.util.*;
 class Solution {
     public int solution(int[] scoville, int K) {
         int answer = 0;
-        PriorityQueue<Integer> tmp = new PriorityQueue<>(); //낮은 숫자의 우선순위가 높은 Queue다. 즉, 낮은 숫자가 더 앞순에 놓이게 되어 가장 작은 숫자부터 높은 숫자대로 정렬된 트리 구조를 보인다.
+        /*
+        *Priority Queue는 낮은 숫자의 우선순위가 높은 Queue다. 즉, 낮은 숫자가 더 앞순에 놓이게 되어 가장 작은 숫자부터 높은 숫자대로 정렬된 트리 구조를 보인다.
+        *만일 높은 숫자가 우선순위가 높게 짜고 싶다면 new PriorityQueue<>(Collections.reversOrder()); 로 초기화하자
+        */
+        PriorityQueue<Integer> tmp = new PriorityQueue<>(); 
         for (int i = 0; i < scoville.length; i++) {
             tmp.add(scoville[i]);
         }
