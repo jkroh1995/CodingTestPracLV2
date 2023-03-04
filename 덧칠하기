@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    public int solution(int n, int m, int[] section) {
+        int answer = 0;
+
+        int [] arr = new int[n];
+        List<Integer>list = new ArrayList<>();
+        for(int i=0;i<section.length;i++){
+            list.add(section[i]-1);
+        }
+
+        //안칠해지면 0 , 칠해져있으면 1
+        for(int i=0;i<arr.length;i++){
+            if(list.contains(i)){
+                arr[i]=0;
+                continue;
+            }
+            arr[i]=1;
+        }
+
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]==0){
+                for(int j=i;j<i+m;j++){
+                    if(j>=arr.length){
+                        break;
+                    }
+                    arr[j]=1;
+                }
+                answer++;
+            }
+        }
+        return answer;
+    }
+}
