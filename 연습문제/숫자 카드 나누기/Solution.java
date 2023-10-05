@@ -12,8 +12,8 @@ class Solution {
         List<Integer> aDivisorList = new ArrayList<>();
         List<Integer> bDivisorList = new ArrayList<>();
 
-        getDivisorList(arrayA, aDivisorList);
-        getDivisorList(arrayB, bDivisorList);
+        getDivisorList(arrayA[0], aDivisorList);
+        getDivisorList(arrayB[0], bDivisorList);
 
         // 공약수만 담을 큐. 큰 수부터 뽑아 쓰면 된다.
         PriorityQueue<Integer> aCommonDivisorQueue = new PriorityQueue<>(Collections.reverseOrder());
@@ -28,11 +28,11 @@ class Solution {
         return answer;
     }
 
-    private static void getDivisorList(int[] arrayA, List<Integer> setA) {
-        for (int i = 1; i < Math.sqrt(arrayA[0]); i++) {
-            if (arrayA[0] % i == 0) {
-                setA.add(i);
-                setA.add(arrayA[0] / i);
+    private static void getDivisorList(int num, List<Integer> divisorList) {
+        for (int i = 1; i < Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                divisorList.add(i);
+                divisorList.add(num / i);
             }
         }
     }
@@ -65,12 +65,12 @@ class Solution {
                 }
             }
 
-            // 만일 정답을 찾으면 멈춘다. 최댓값이면 바꿔주고 끝내고, 그렇지 않으면 이후에는 더 작은 숫자만 나오니 끝내도 된다.
+            // 만일 정답을 찾으면 멈춘다.
             if (isAnswer) {
                 if (num > answer) {
                     answer = num;
+                    break;
                 }
-                break;
             }
         }
         return answer;
