@@ -21,7 +21,7 @@ class Solution {
 
             // 현재까지 찾은 후보 키들을 순회
             for(Set<Integer> eachCandidateKey : candidateKeySet){
-                // 이번에 알아보고자 하는 후보키가 이미 후보 키로 선정된 키를 포함하고 있다면 이번 순서 생략
+                // 이번에 알아보고자 하는 후보키가 이미 후보 키로 선정된 키를 포함하고 있다면(최소성을 만족시키지 못한다면) 이번 순서 생략
                 if (candidateKey.containsAll(eachCandidateKey)) {
                     isAlreadyCandidateKey = true;
                     break;
