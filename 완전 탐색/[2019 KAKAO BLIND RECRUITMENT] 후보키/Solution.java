@@ -39,6 +39,10 @@ class Solution {
                 for(int key : candidateKey){
                     info.append(attribute[key]);
                 }
+                // 유일성을 만족시키지 못하면 종료
+                if(attributeSet.contains(info.toString())){
+                    break;
+                }
                 attributeSet.add(info.toString());
             }
             // 만일 구한 attribute 집합의 크기가 relation의 크기와 같다면 후보 키 set에 이번 키 추가
